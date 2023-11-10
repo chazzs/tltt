@@ -9,21 +9,18 @@
                 src: url(tltt.woff);
             }
             body{
-                display: flex;
-                flex-flow: column;
                 height: 100%;
                 margin:0;
                 text-align: center;
-            }
-            textarea {
-                font-size: 4rem;
-                letter-spacing: 1px;
+                overflow: hidden;
             }
             textarea {
                 width: 100%;
                 height: 100%;
-                padding: 10px;
+                padding-top: 2rem;
                 line-height: 1.5;
+                font-size: 4rem;
+                letter-spacing: 1px;
                 border: none;
                 background-color: whitesmoke;
                 touch-action: manipulation;
@@ -44,7 +41,8 @@
                 margin: 0 3rem;
             }
             .canvas{
-                height:100%;
+                display: flex;
+                height: 100%;
             }
             .button{
                 cursor: pointer;
@@ -112,7 +110,6 @@
 
             function showText(idx){
                 area.value = stack[idx];
-                console.log("show: "+idx+"->"+stack[idx]);
                 if(idx > 0 && idx < stack.length-1){
                     left.classList.remove("disable");
                     right.classList.remove("disable");
@@ -127,14 +124,11 @@
                 }
             }
             function clearArea(){
-                //console.log("clear ["+stack.length+"] "+ s)
                 if( (area.dataset['mod'] == 1) && (area.value.trim().length > 0) ){
-                    console.log("push: "+area.value);
                     stack.push(area.value);
                     right.classList.add("disable");
                     left.classList.remove("disable");
                 }
-
                 s = stack.length;
                 area.value="";
                 area.dataset['mod'] = 0;
@@ -142,12 +136,10 @@
 
             left.addEventListener('click', (e) => {
                 if(!left.classList.contains('disable')){
-                    console.log("back reading: "+s+"->"+stack[s]);
                     showText(--s);
                 }
             });
             right.addEventListener('click', (e) => {
-                console.log("forward reading: "+s+"->"+stack[s]);
                 if(!right.classList.contains('disable')){
                     showText(++s);
                 }
@@ -163,12 +155,10 @@
                 console.log("button: "+e.target.classList);
             });
             rem.addEventListener('click', (e) => {
-                console.log("button: "+e.target.classList);
                 clearArea();
             });
 
             area.addEventListener('keydown', (e) => {
-                console.log("keydown");
                 area.dataset['mod'] = 1;
             });
             area.addEventListener("dblclick", (e) => {
