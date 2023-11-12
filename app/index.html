@@ -9,6 +9,9 @@
                 src: url(tltt.woff);
             }
             body{
+                font-family: monospace;
+                font-size: 24px;
+                color: #34515e;
                 height: 100%;
                 margin:0;
                 text-align: center;
@@ -77,31 +80,77 @@
             .tltt.dark:before{
                 content: "\e906";
             }
+            .tltt.help:before{
+                content: "\e907";
+            }
 
-            body.dark .bar, body.dark textarea{
+            body.dark .bar,
+            body.dark textarea,
+            body.dark section.info{
                 background-color: #231f20;
-                color: whitesmoke;
+                color: #c1c1c1;
+            }
+
+            section.info{
+                position: fixed;
+                display: none;
+                padding:2rem;
+                font-size: 32px;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: whitesmoke;
+                z-index: 2;
+                cursor: pointer;
             }
         </style>
     </head>
     <body>
-        <div class="bar">
+        <section class="bar">
             <span class="button tltt left disable"></span>
-            <span class="button tltt hist disable"></span>
+            <span class="button tltt help"></span>
             <h1>2 Loud 2 Talk</h1>
             <span class="button tltt remove"></span>
             <span class="button tltt dark"></span>
             <span class="button tltt right disable"></span>
-        </div>
-        <div class="canvas">
+        </section>
+        <section class="canvas">
             <textarea placeholder="&lt;double tap to clear&gt;"></textarea>
-        </div>
+        </section>
+        <section class="info" onclick="showHelp(false)">
+            <div>
+                <h3>Too Loud To Talk (tltt)</h3>
+                <p>A simple hyper-local chat app.</p>
+                <p>
+                    For those times when you just can't hear the person you are talking to or,
+                    for the times when "quiet" is the name of the game. You can pass along a simple
+                    message and don't have hassle with SMS or other messaging services or noisy
+                    notifications or buzzing.
+                </p>
+                    <h4>Buttons across the top do stuff</h4>
+                    <ul style="text-align: initial;">
+                        <li>Dark mode</li>
+                        <li>Clear the window(or double tap  the text)</li>
+                        <li>Go back and forward though text history</li>
+                        <li>See this fancy help</li>
+                    </ul>
+                <p style="text-align: initial;">
+                    Type up a message and show it to someone!<br>
+                    Pass back and forth to read and/or respond.
+                </p>
+                <p style="margin-top:8rem; font-style:italic;">
+                    &lt; tap to close &gt;
+                </p>
+            </div>
+        </section>
         <script type="text/javascript">
             const area  = document.querySelector("textarea");
             const left  = document.querySelector(".button.left");
             const right = document.querySelector(".button.right");
             const dark  = document.querySelector(".button.dark");
             const hist  = document.querySelector(".button.hist");
+            const help  = document.querySelector(".button.help");
             const rem   = document.querySelector(".button.remove");
             // const buttons = document.querySelectorAll(".button");
 
@@ -133,7 +182,13 @@
                 area.value="";
                 area.dataset['mod'] = 0;
             }
-
+            function showHelp(t){
+                let hlp = document.querySelector("section.info");
+                if(t)
+                   hlp.style.display = "block";
+                else
+                    hlp.style.removeProperty("display");
+            }
             left.addEventListener('click', (e) => {
                 if(!left.classList.contains('disable')){
                     showText(--s);
@@ -151,8 +206,12 @@
                 else
                     body.classList.add("dark");
             });
-            hist.addEventListener('click', (e) => {
+            // hist.addEventListener('click', (e) => {
+            //     console.log("button: "+e.target.classList);
+            // });
+            help.addEventListener('click', (e) => {
                 console.log("button: "+e.target.classList);
+                showHelp(true);
             });
             rem.addEventListener('click', (e) => {
                 clearArea();
