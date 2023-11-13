@@ -1,13 +1,10 @@
 <!doctype html>
 <html lang="en" style="height: 100%;">
     <head>
+        <!-- Philomela -->
         <meta charset="UTF-8" />
         <title>2 Loud 2 Talk</title>
         <style type="text/css">
-            @font-face {
-                font-family: tltt;
-                src: url(tltt.woff);
-            }
             body{
                 font-family: monospace;
                 font-size: 24px;
@@ -16,6 +13,9 @@
                 margin:0;
                 text-align: center;
                 overflow: hidden;
+            }
+            svg{
+                fill:#34515e;
             }
             textarea {
                 width: 100%;
@@ -50,6 +50,9 @@
             .button{
                 cursor: pointer;
             }
+            .button.disable svg{
+                fill:#ccc;
+            }
             .disable{
                 color: #ccc;
                 cursor: not-allowed;
@@ -59,36 +62,14 @@
                 font-size: 4rem;
                 margin:0 1rem;
             }
-            .tltt.plus:before{
-                content: "\e901";
-            }
-            .tltt.minus:before{
-                content: "\e900";
-            }
-            .tltt.left:before{
-                content: "\e905";
-            }
-            .tltt.right:before{
-                content: "\e904";
-            }
-            .tltt.hist:before{
-                content: "\e903";
-            }
-            .tltt.remove:before{
-                content: "\e902";
-            }
-            .tltt.dark:before{
-                content: "\e906";
-            }
-            .tltt.help:before{
-                content: "\e907";
-            }
 
             body.dark .bar,
             body.dark textarea,
-            body.dark section.info{
+            body.dark section.info,
+            body.dark svg{
                 background-color: #231f20;
                 color: #c1c1c1;
+                fill: #c1c1c1;
             }
 
             section.info{
@@ -105,15 +86,27 @@
                 cursor: pointer;
             }
         </style>
+        <script type="text/javascript">
+        </script>
     </head>
     <body>
         <section class="bar">
-            <span class="button tltt left disable"></span>
-            <span class="button tltt help"></span>
+            <span class="button tltt left disable">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"/></svg>
+            </span>
+            <span class="button tltt help">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M80 160c0-35.3 28.7-64 64-64h32c35.3 0 64 28.7 64 64v3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74V320c0 17.7 14.3 32 32 32s32-14.3 32-32v-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7V160c0-70.7-57.3-128-128-128H144C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
+            </span>
             <h1>2 Loud 2 Talk</h1>
-            <span class="button tltt remove"></span>
-            <span class="button tltt dark"></span>
-            <span class="button tltt right disable"></span>
+            <span class="button tltt remove">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"/></svg>
+            </span>
+            <span class="button tltt dark">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
+            </span>
+            <span class="button tltt right disable">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
+            </span>
         </section>
         <section class="canvas">
             <textarea placeholder="&lt;double tap to clear&gt;"></textarea>
@@ -145,17 +138,55 @@
             </div>
         </section>
         <script type="text/javascript">
-            const area  = document.querySelector("textarea");
-            const left  = document.querySelector(".button.left");
-            const right = document.querySelector(".button.right");
-            const dark  = document.querySelector(".button.dark");
-            const hist  = document.querySelector(".button.hist");
-            const help  = document.querySelector(".button.help");
-            const rem   = document.querySelector(".button.remove");
-            // const buttons = document.querySelectorAll(".button");
+            upm = new URLSearchParams(window.location.search);
+            if(upm.has('dark'))
+                document.body.classList.add("dark");
 
-            const stack = [];
             s = 0;
+            const stack = [];
+            const area  = document.querySelector("textarea");
+            const left  = document.querySelector(".button.left")
+            const right = document.querySelector(".button.right")
+            const dark  = document.querySelector(".button.dark")
+            const help  = document.querySelector(".button.help")
+            const rem   = document.querySelector(".button.remove")
+
+            left.addEventListener('click', (e) => {
+                if(!left.classList.contains('disable')){
+                    showText(--s);
+                }
+            });
+            right.addEventListener('click', (e) => {
+                if(!right.classList.contains('disable')){
+                    showText(++s);
+                }
+            });
+            dark.addEventListener('click', (e) => {
+                body = document.querySelector("body");
+                if(body.classList.contains("dark")){
+                    window.location.search = "";
+                }
+                else{
+                    window.location.search = "?dark";
+                }
+            });
+            help.addEventListener('click', (e) => {
+                console.log("button: "+e.target.classList);
+                showHelp(true);
+            });
+            rem.addEventListener('click', (e) => {
+                clearArea();
+            });
+
+            area.addEventListener('keydown', (e) => {
+                area.dataset['mod'] = 1;
+            });
+            area.addEventListener("dblclick", (e) => {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                e.stopPropagation();
+                clearArea();
+            });
 
             function showText(idx){
                 area.value = stack[idx];
@@ -189,43 +220,6 @@
                 else
                     hlp.style.removeProperty("display");
             }
-            left.addEventListener('click', (e) => {
-                if(!left.classList.contains('disable')){
-                    showText(--s);
-                }
-            });
-            right.addEventListener('click', (e) => {
-                if(!right.classList.contains('disable')){
-                    showText(++s);
-                }
-            });
-            dark.addEventListener('click', (e) => {
-                body = document.querySelector("body");
-                if(body.classList.contains("dark"))
-                    body.classList.remove("dark");
-                else
-                    body.classList.add("dark");
-            });
-            // hist.addEventListener('click', (e) => {
-            //     console.log("button: "+e.target.classList);
-            // });
-            help.addEventListener('click', (e) => {
-                console.log("button: "+e.target.classList);
-                showHelp(true);
-            });
-            rem.addEventListener('click', (e) => {
-                clearArea();
-            });
-
-            area.addEventListener('keydown', (e) => {
-                area.dataset['mod'] = 1;
-            });
-            area.addEventListener("dblclick", (e) => {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                e.stopPropagation();
-                clearArea();
-            });
         </script>
     </body>
 </html>
