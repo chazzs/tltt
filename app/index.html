@@ -31,6 +31,12 @@
             textarea::placeholder{
                 text-align: center;
             }
+            ul{
+                text-align: initial;
+            }
+            li{
+                margin:1.5rem 0;
+            }
             .bar{
                 display: flex;
                 justify-content: center;
@@ -125,7 +131,7 @@
                     notifications or buzzing.
                 </p>
                     <h4>Buttons across the top do stuff</h4>
-                    <ul style="text-align: initial;">
+                    <ul>
                         <li>Dark mode</li>
                         <li>Clear the window(or double tap  the text)</li>
                         <li>Go back and forward though text history</li>
@@ -141,8 +147,12 @@
             </div>
         </section>
         <section class="history" onclick="showHistory(false)">
+           <h3>History</h3>
             <ul></ul>
-        </section>
+            <p style="margin-top:8rem; font-style:italic;">
+                &lt; tap to close &gt;
+            </p>
+    </section>
         <script type="text/javascript">
             upm = new URLSearchParams(window.location.search);
             if(upm.has('dark'))
@@ -212,17 +222,22 @@
             }
 
             function showHistory(t){
-                let hst = document.querySelector("section.history");
-                let lst = document.querySelector("section.history ul");
                 let itm = document.querySelector("section.history ul li");
                 if(itm == null){
-                    //generate li list.
-                    stack.forEach(element => {
+                    let lst = document.querySelector("section.history ul");
+                    stack.forEach((element, index) => {
                         let el = document.createElement('li');
+                        // el.setAttribute('index', index);
+                        el.addEventListener('click', (e) =>{
+                            showText(index);
+                            s=index;
+                        });
                         el.append(element);
                         lst.append(el);
                     });
                 }
+
+                let hst = document.querySelector("section.history");
                 if(t)
                    hst.style.display = "block";
                 else
